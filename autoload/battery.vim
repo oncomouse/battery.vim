@@ -31,12 +31,9 @@ endfunction
 
 function! battery#graph() abort
   let backend = battery#backend()
-  let nf = float2nr(round(backend.value / (100.0 / g:battery#graph_width)))
-  let nn = g:battery#graph_width - nf
-  return printf('%s%s',
-        \ repeat(g:battery#graph_symbol_fill, nf),
-        \ repeat(g:battery#graph_symbol_null, nn),
-        \)
+  let batteries = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+  let bi = float2nr(round(backend.value / (100.0 / 7)))
+  return printf('%s', batteries[bi])
 endfunction
 
 function! battery#watch() abort
